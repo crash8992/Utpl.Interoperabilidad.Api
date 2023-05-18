@@ -30,4 +30,4 @@ def obtener_persona (persona_id: int):
 
 @app.get("/")
 def read_root():
-    return {"Hello": "Gracias Totales"}
+    return {"Hello": "buenas noches"}
