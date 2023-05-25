@@ -31,7 +31,11 @@ def obtener_jugador(jugador_id: int):
 
 @app.delete("/jugadores/{jugador_id}")
 def eliminar_jugador(jugador_id: int):
-    jugador_eliminado = jugadorList.pop(jugador_id)
+    for index, jugador in enumerate(jugarList):
+        if jugador.id == jugador_id:
+            jugarList.pop(index)
+            return {"message": "Jugador eliminado"}
+    raise HTTPException(status_code=404, detail="Jugador no encontrado")
 
 
 @app.get("/")
