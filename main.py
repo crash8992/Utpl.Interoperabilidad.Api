@@ -29,6 +29,11 @@ def obtener_jugador(jugador_id: int):
             return jugador
     raise HTTPException(status_code=404, detail="Jugador no encontrado")
 
+@app.delete("/jugadores/{jugador_id}")
+def eliminar_jugador(jugador_id: int):
+    jugador_eliminado = jugadorList.pop(jugador_id)
+
+
 @app.get("/")
 def read_root():
     return {"Hello": "Gracias Totales"}

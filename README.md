@@ -2,7 +2,10 @@
 
 This is a [Python Flask](https://flask.palletsprojects.com/en/2.0.x) template configured for ephemeral cloud development environments on [Gitpod](https://www.gitpod.io/).
 
-## Next Steps
+Api para describir un jugador
+
+## Secuencia para despliegue en producción
+
 
 Click the button below to start a new development environment:
 
