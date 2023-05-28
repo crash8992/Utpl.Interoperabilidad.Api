@@ -6,6 +6,13 @@ Api para describir un jugador
 
 ## Secuencia para despliegue en producción
 
+1. Configurar el repositorio con el archivo requiriments.txt
+2. loggearse tras crear una cuenta en www.render.com
+3. vincular el repositorio de github. en render.com
+4. crear el servicio web en render.com
+5. realizar la configuración de la app en render.com
+6. realizar el despliegue
+
 
 Click the button below to start a new development environment:
 
