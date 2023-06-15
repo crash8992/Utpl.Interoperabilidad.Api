@@ -2,6 +2,13 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
 
+import spotipy
+
+sp = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyClientCredentials(
+    client_id='030dfbeeb23345d084575346f635465b',
+    client_secret='4ca662fd4d5e4430bc75a3d36692afcc'
+))
+
 app = FastAPI()
 
 class Jugar(BaseModel):
@@ -36,6 +43,11 @@ def eliminar_jugador(jugador_id: int):
             jugarList.pop(index)
             return {"message": "Jugador eliminado"}
     raise HTTPException(status_code=404, detail="Jugador no encontrado")
+
+@app.get("/pista/{pista_id}")
+async def obtener_pista(pista_id: str):
+    track = sp.track(pista_id)
+    return track
 
 
 @app.get("/")
