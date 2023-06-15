@@ -9,7 +9,36 @@ sp = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyClientCredentials(
     client_secret='4ca662fd4d5e4430bc75a3d36692afcc'
 ))
 
-app = FastAPI()
+description = """
+Utpl tnteroperabilidad API ayuda a describir las capacidades de un directorio. 🚀
+
+## Items
+
+You can **read items**.
+
+## Users
+
+You will be able to:
+
+* **Crear info artista** (_not implemented_).
+* **Read users** (_not implemented_).
+"""
+
+app = FastAPI(
+    title="Utpl Interoperabilidad APP",
+    description= description,
+    version="0.0.1",
+    terms_of_service="http://example.com/terms/",
+    contact={
+        "name": "Cristian Bravo",
+        "url": "http://x-force.example.com/contact/",
+        "email": "cpbravo3@utpl.edu.ec",
+    },
+    license_info={
+        "name": "Apache 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+    }
+)
 
 class Jugar(BaseModel):
     id: int
