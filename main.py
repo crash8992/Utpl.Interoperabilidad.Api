@@ -8,9 +8,9 @@ import uuid
 #importar libreria mongoDb
 import pymongo
 
-client = pymongo.MongoClient('mongodb+srv://cristianB:Solidsnake1989@clustercb.3wurcux.mongodb.net/?retryWrites=true&w=majority')
-database = client["ejemplo01"]
-coleccion = database["Jugadores"]
+client = pymongo.MongoClient('mongodb+srv://cristianB:cpbomax1989@cluster0.kddef5q.mongodb.net/?retryWrites=true&w=majority')
+database = client["ejemploDB"]
+coleccion = database["jugadores"]
 
 sp = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyClientCredentials(
     client_id='030dfbeeb23345d084575346f635465b',
