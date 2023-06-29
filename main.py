@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
+from fastapi_versioning import VersionedFastAPI, version
 
 import spotipy
 import uuid
@@ -90,7 +91,7 @@ def obtener_jugador (jugador_id: str):
     if item:
         return item
     else:
-        raise HTTPException(status_code=404, detail="Persona no encontrado")
+        raise HTTPException(status_code=404, detail="Jugador no encontrado")
     
 
 @app.delete("/jugador/{jugador_id}", tags=["jugadores"])
@@ -115,3 +116,5 @@ async def get_artista(artista_id: str):
 @app.get("/")
 def read_root():
     return {"Hello": "Gracias Totales"}
+
+app = VersionedFastAPI(app)
