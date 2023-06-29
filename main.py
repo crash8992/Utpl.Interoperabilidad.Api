@@ -8,7 +8,7 @@ import uuid
 #importar libreria mongoDb
 import pymongo
 
-client = pymongo.MongoClient('mongodb+srv://cristianB:cpbomax1989@cluster0.kddef5q.mongodb.net/?retryWrites=true&w=majority')
+client = pymongo.MongoClient("mongodb+srv://userCB123:Cpbomax1989@cluster0.kddef5q.mongodb.net/?retryWrites=true&w=majority")
 database = client["ejemploDB"]
 coleccion = database["jugadores"]
 
