@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List, Optional
 from fastapi_versioning import VersionedFastAPI, version
 
 import spotipy
 import uuid
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from auth import authenticate
 
 #importar libreria mongoDb
 import pymongo
@@ -74,18 +76,21 @@ class JugadorIngreso (BaseModel):
 personaList = []
 
 @app.post("/jugadores", response_model=JugadorRepos, tags = ["jugadores"])
+@version(1, 0)
 async def crear_jugador(player: JugadorIngreso):
     itemJugador = JugadorRepos(id=str(uuid.uuid4()), nombre= player.nombre, edad = player.edad, equipo = player.equipo, min_jugados = player.min_jugados)
     result = coleccion.insert_one(itemJugador.dict())
     return itemJugador
 
 @app.get("/jugadores", response_model=List[JugadorRepos], tags=["jugadores"])
+@version(1, 0)
 def get_jugadores():
     items = list(coleccion.find())
     print (items)
     return items
 
 @app.get("/jugadores/{jugador_id}", response_model=JugadorRepos , tags=["jugadores"])
+@version(1, 0)
 def obtener_jugador (jugador_id: str):
     item = coleccion.find_one({"id": jugador_id})
     if item:
@@ -95,6 +100,7 @@ def obtener_jugador (jugador_id: str):
     
 
 @app.delete("/jugador/{jugador_id}", tags=["jugadores"])
+@version(1, 0)
 def eliminar_jugador (jugador_id: str):    
     result = coleccion.delete_one({"id": jugador_id})
     if result.deleted_count == 1:
@@ -103,11 +109,13 @@ def eliminar_jugador (jugador_id: str):
         raise HTTPException(status_code=404, detail="Jugador NO encontrada")
 
 @app.get("/pista/{pista_id}")
+@version(1, 0)
 async def obtener_pista(pista_id: str):
     track = sp.track(pista_id)
     return track
 
 @app.get("/artistas/{artista_id}")
+@version(1, 0)
 async def get_artista(artista_id: str):
     artista = sp.artist(artista_id)
     return artista
