@@ -49,7 +49,7 @@ app = FastAPI(
     terms_of_service="http://example.com/terms/",
     contact={
         "name": "Cristian Bravo",
-        "url": "http://x-force.example.com/contact/",
+        "url": "https://github.com/crash8992",
         "email": "cpbravo3@utpl.edu.ec",
     },
     license_info={
