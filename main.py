@@ -59,6 +59,9 @@ app = FastAPI(
     openapi_tags = tags_metadata
 )
 
+#para agregar seguridad a nuestro api
+security = HTTPBasic()
+
 class JugadorRepos (BaseModel):
     id: str
     nombre: str
@@ -72,6 +75,12 @@ class JugadorIngreso (BaseModel):
     equipo: Optional[str] = None
     min_jugados: int
 
+class JugadorEntradaV2 (BaseModel):
+    nombre: str
+    edad: int
+    equipo: str
+    min_jugados: int
+    
 
 personaList = []
 
@@ -82,9 +91,17 @@ async def crear_jugador(player: JugadorIngreso):
     result = coleccion.insert_one(itemJugador.dict())
     return itemJugador
 
+@app.post("/jugadores", response_model=JugadorEntradaV2, tags = ["jugadores"])
+@version(2, 0)
+async def crear_jugadorv2(playerE: JugadorEntradaV2):
+    itemJugador = JugadorRepos (id= str(uuid.uuid4()), nombre= playerE.nombre, edad = playerE.edad, equipo = playerE.equipo, min_jugados = playerE.min_jugados)
+    resultadoDB =  coleccion.insert_one(itemJugador.dict())
+    return itemJugador
+
 @app.get("/jugadores", response_model=List[JugadorRepos], tags=["jugadores"])
 @version(1, 0)
-def get_jugadores():
+def get_jugadores(credentials: HTTPBasicCredentials = Depends(security)):
+    authenticate(credentials)
     items = list(coleccion.find())
     print (items)
     return items
