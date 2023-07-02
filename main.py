@@ -82,7 +82,7 @@ class JugadorEntradaV2 (BaseModel):
     min_jugados: int
     
 
-personaList = []
+jugadorList = []
 
 @app.post("/jugadores", response_model=JugadorRepos, tags = ["jugadores"])
 @version(1, 0)
