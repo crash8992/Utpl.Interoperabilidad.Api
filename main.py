@@ -100,8 +100,7 @@ async def crear_jugadorv2(playerE: JugadorEntradaV2):
 
 @app.get("/jugadores", response_model=List[JugadorRepos], tags=["jugadores"])
 @version(1, 0)
-def get_jugadores(credentials: HTTPBasicCredentials = Depends(security)):
-    authenticate(credentials)
+def get_jugadores():
     items = list(coleccion.find())
     print (items)
     return items
